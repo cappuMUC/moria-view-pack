@@ -10,6 +10,7 @@
 <%= csrf_meta_tag %>
 <%= favicon %>
 <%= stylesheet_link_tag 'jquery/jquery-ui-1.11.0', 'application', :media => 'all' %>
+<%= stylesheet_link_tag 'moria_view_pack', :plugin => 'moria_view_pack', :media => 'all' %>
 <%= stylesheet_link_tag 'rtl', :media => 'all' if l(:direction) == 'rtl' %>
 <%= javascript_heads %>
 <%= heads_for_theme %>
@@ -17,15 +18,14 @@
 <!-- page specific tags -->
 <%= yield :header_tags -%>
 </head>
-<body class="<%= body_css_classes %>">
+<body class="<%= body_css_classes %> moria">
 <%= call_hook :view_layouts_base_body_top %>
 <div id="wrapper">
 <div id="top-menu">
-    <div id="account">
-        <%= content_tag('div', "#{l(:label_logged_as)} #{link_to_user(User.current, :format => :username)}".html_safe, :id => 'loggedas') if User.current.logged? %>
-        <%= render_menu :account_menu -%>
-    </div>
-    <%= render_menu :top_menu if User.current.logged? || !Setting.login_required? -%>
+  <div id="header">
+    <h1><%= page_header_title %></h1>
+  </div>
+  <div id="toolbar">
     <% if User.current.logged? || !Setting.login_required? %>
     <div id="quick-search">
         <%= form_tag({:controller => 'search', :action => 'index', :id => @project}, :method => :get ) do %>
@@ -34,22 +34,26 @@
         <label for='q'>
           <%= link_to l(:label_search), {:controller => 'search', :action => 'index', :id => @project}, :accesskey => accesskey(:search) %>
         </label>
-        <%= text_field_tag 'q', @question, :size => 20, :class => 'small', :placeholder => 'Search', :accesskey => accesskey(:quick_search) %>
+        <%= text_field_tag 'q', @question, :size => 20, :class => 'small', :placeholder => l(:label_search), :accesskey => accesskey(:quick_search) %>
         <% end %>
         <%= render_project_jump_box %>
     </div>
-    
     <% end %>
-    <h1><%= page_header_title %></h1>
+    <div id="widgets">
+      <%= render_menu :top_menu if User.current.logged? || !Setting.login_required? -%>
+    </div>
+    <div id="account">
+        <%= content_tag('div', "#{l(:label_logged_as)} #{link_to_user(User.current, :format => :username)}".html_safe, :id => 'loggedas') if User.current.logged? %>
+        <%= render_menu :account_menu -%>
+    </div>
+  </div>
 </div>
 
-<div id="header">
-    <% if display_main_menu?(@project) %>
-    <div id="main-menu" class="tabs">
-        <%= render_main_menu(@project) %>
-    </div>
-    <% end %>
+<% if display_main_menu?(@project) %>
+<div id="main-menu" class="tabs">
+    <%= render_main_menu(@project) %>
 </div>
+<% end %>
 
 <div id="main" class="<%= sidebar_content? ? '' : 'nosidebar' %>">
     <div id="sidebar">
