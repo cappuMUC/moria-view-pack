@@ -12,14 +12,14 @@ body.moria #top-menu {
   justify-content: flex-start;
 }
 
-body.moria #top-menu * {
+body.moria #top-menu > * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
 #top-menu #header {
-  flex: 1 0 50%;
+  flex: 1 0 40%;
   background: transparent;
   min-height: unset;
   padding: 0 10px;
@@ -28,8 +28,28 @@ body.moria #top-menu * {
   align-items: center;
 }
 
+#top-menu #header h1 {
+  margin: 0;
+}
+
+#header h1 .breadcrumbs > * {
+  display: inline-block !important;
+  font-size: inherit;
+}
+
+#header h1 .breadcrumbs:last-child {
+  
+}
+
+.breadcrumbs span.separator {
+}
+
+.breadcrumbs span.separator::after {
+  content: '/';
+}
+
 #top-menu #toolbar {
-  flex: 1 0 50%;
+  flex: 1 0 60%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
@@ -41,10 +61,18 @@ body.moria #top-menu * {
   padding: 0 15px;
 }
 
-#widgets ul li { margin: 0 5px !important;}
 
 #toolbar #quick-search {
+  display: flex;
+  align-items: center;
+}
+
+#quick-search label {
   display: none;
+}
+
+#quick-search > * {
+  margin: 0 2px;
 }
 
 #toolbar #account {
