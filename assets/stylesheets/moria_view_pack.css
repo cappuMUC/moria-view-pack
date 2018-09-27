@@ -1,0 +1,65 @@
+body.moria {
+  display: flex;
+  flex-direction: column;
+}
+
+body.moria #top-menu {
+  height: 4em;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+body.moria #top-menu * {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+#top-menu #header {
+  flex: 1 0 50%;
+  background: transparent;
+  min-height: unset;
+  padding: 0 10px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+#top-menu #toolbar {
+  flex: 1 0 50%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+#toolbar #widgets {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+}
+
+#widgets ul li { margin: 0 5px !important;}
+
+#toolbar #quick-search {
+  display: none;
+}
+
+#toolbar #account {
+  display: flex;
+  padding: 0 10px;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+
+body.moria #main-menu {
+  position: relative;
+  left: 0;
+  margin: 0;
+  padding: 0;
+  background: #759fcf 
+}
